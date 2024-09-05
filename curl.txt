@@ -1,0 +1,11 @@
+curl -s -X POST -d '{
+  "textQuery" : "Tripp Chafin & Co, 1225 Johnson Ferry Rd #200, Marietta, GA 30068"
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: AIzaSyAUNA9dhE-Wunq4u3H9j0fA4wt_H7PQHFM' \
+-H 'X-Goog-FieldMask: places.id,places.displayName,places.formattedAddress' \
+'https://places.googleapis.com/v1/places:searchText' | jq .
+
+curl -s -X GET -H 'Content-Type: application/json' \
+-H "X-Goog-Api-Key: AIzaSyAUNA9dhE-Wunq4u3H9j0fA4wt_H7PQHFM" \
+-H "X-Goog-FieldMask: id,displayName,rating,userRatingCount,reviews" \
+https://places.googleapis.com/v1/places/ChIJIbGNlZ4N9YgRSRWBdw3NAV4 | jq .
