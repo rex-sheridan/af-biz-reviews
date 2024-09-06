@@ -1,6 +1,6 @@
-(ns tax-review-app.views.reviews
+(ns company-reviews.views.reviews
   (:require [hiccup.page :refer [html5 include-css include-js]]
-            [tax-review-app.views.layout :as layout]))
+            [company-reviews.views.layout :as layout]))
 
 (defn index []
   (layout/application 

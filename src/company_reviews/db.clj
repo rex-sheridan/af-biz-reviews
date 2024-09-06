@@ -1,4 +1,4 @@
-(ns tax-review-app.db
+(ns company-reviews.db
   (:require [next.jdbc :as jdbc]
             [honey.sql :as sql]
             [honey.sql.helpers :refer [insert-into select from values where update set returning]]

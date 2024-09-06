@@ -1,7 +1,7 @@
-(ns tax-review-app.views.company-registration
-  (:require [tax-review-app.views.layout :as layout]
-            [tax-review-app.db :as db]
-            [tax-review-app.google-places-api :as google-api]
+(ns company-reviews.views.company-registration
+  (:require [company-reviews.views.layout :as layout]
+            [company-reviews.db :as db]
+            [company-reviews.google-places-api :as google-api]
             [selmer.parser :as selmer]))
 
 (defn registration-form []

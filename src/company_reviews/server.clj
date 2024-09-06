@@ -1,14 +1,19 @@
-(ns tax-review-app.core
-  (:require [ring.adapter.jetty :as jetty]
-            [tax-review-app.handler :as handler]
-            [tax-review-app.db :as db]))
+(ns company-reviews.server
+  (:require [ring.adapter.jetty :as jetty] 
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [company-reviews.routes :as routes]
+            [company-reviews.db :as db]))
 
 (defn create-tables[]
   (println "Tables created" (db/create-tables!))
   true)
 
+(def app
+  (-> (routes/app-routes)
+      (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))))
+
 (defn run [s] (if (nil? s)
-                (jetty/run-jetty handler/app {:port 3000 :join? false})
+                (jetty/run-jetty app {:port 3000 :join? false})
                 s))
 
 (defonce server (atom nil))

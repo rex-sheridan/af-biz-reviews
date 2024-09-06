@@ -17,4 +17,4 @@
   :build {:deps {io.github.seancorfield/build-clj
                  {:git/tag "v0.8.2" :git/sha "0ffdb4c"}}
           :ns-default build}
-  :run {:main-opts ["-m" "tax-review-app.core"]}}}
+  :run {:main-opts ["-m" "company-reviews.server"]}}}

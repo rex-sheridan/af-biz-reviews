@@ -1,4 +1,4 @@
-(ns tax-review-app.views.layout
+(ns company-reviews.views.layout
   (:require [selmer.parser :as selmer]
             [ring.util.response :as response]
             [clojure.java.io :as io]))

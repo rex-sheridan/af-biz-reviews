@@ -1,4 +1,4 @@
-(ns tax-review-app.google-places-api
+(ns company-reviews.google-places-api
   (:require [clj-http.client :as http]
             [cheshire.core :as json]))
 

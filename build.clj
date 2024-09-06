@@ -3,7 +3,7 @@
 
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
-(def uber-file "target/tax-review-app.jar")
+(def uber-file "target/company-reviews.jar")
 
 (defn clean [_]
   (b/delete {:path "target"}))
@@ -18,7 +18,7 @@
   (b/uber {:class-dir class-dir
            :uber-file uber-file
            :basis basis
-           :main 'tax-review-app.core}))
+           :main 'company-reviews.core}))
 
 (defn tailwind [_]
   (b/process {:command-args ["npx" "tailwindcss"

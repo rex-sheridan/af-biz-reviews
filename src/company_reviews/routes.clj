@@ -1,8 +1,8 @@
-(ns tax-review-app.routes
+(ns company-reviews.routes
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [tax-review-app.views.reviews :as reviews]
-            [tax-review-app.views.company-registration :as registration]))
+            [company-reviews.views.reviews :as reviews]
+            [company-reviews.views.company-registration :as registration]))
 
 (defn app-routes []
   (routes
