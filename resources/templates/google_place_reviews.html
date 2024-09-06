@@ -1,0 +1,29 @@
+<div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4">{{ place-details.displayName.text }}</h2>
+    
+    {% if place-details.error %}
+      <p class="text-red-500">{{ place-details.error }}</p>
+    {% else %}
+      <div class="mb-4">
+        <p>Rating: {{ place-details.rating }} ({{ place-details.userRatingCount }} reviews)</p>
+      </div>
+      
+      <h3 class="text-xl font-semibold mb-2">Reviews:</h3>
+      {% for review in place-details.reviews %}
+        <div class="border p-4 mb-4 rounded">
+          <p class="text-sm text-gray-600">{{ review.relativePublishTimeDescription }}</p>
+          <p class="font-semibold">Rating: {{ review.rating }}/5</p>
+          {% if review.text %}
+            <p class="mt-2">{{ review.text.text }}</p>
+          {% endif %}
+          <p class="mt-2">
+            By: <a href="{{ review.authorAttribution.uri }}" target="_blank" class="text-blue-500 hover:underline">
+              {{ review.authorAttribution.displayName }}
+            </a>
+          </p>
+          <p class="text-sm text-gray-600">Published: {{ review.publishTime }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  

@@ -31,5 +31,9 @@
         place-id (:place-id params)]
     (when (and company-id place-id)
       (db/update-company-google-place-id! company-id place-id))
-    (layout/application
-     (str "Google Place ID updated successfully for company " company-id))))
+    (if (= place-id "none")
+      (layout/application "No matching business selected")
+      (let [place-details (google-api/get-place-details place-id)]
+        (layout/application
+         (selmer/render-file "google_place_reviews.html"
+                             {:place-details place-details}))))))

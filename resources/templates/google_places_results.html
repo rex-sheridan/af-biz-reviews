@@ -12,9 +12,13 @@
           <p>{{ place.formattedAddress }}</p>
           <button hx-post="/select-place"
                   hx-vals='{"company-id": "{{ company-id }}", "place-id": "{{ place.id }}"}'
+                  hx-target="#reviews-{{ place.id }}"
                   class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             This is my business
           </button>
+          <div id="reviews-{{ place.id }}">
+
+          </div>
         </div>
       {% endfor %}
       <button hx-post="/select-place"
