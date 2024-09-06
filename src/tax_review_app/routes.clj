@@ -9,5 +9,6 @@
    (GET "/" [] (reviews/index))
    (GET "/register" [] (registration/registration-form))
    (POST "/register" {params :params} (registration/handle-registration params))
+   (POST "/select-place" {params :params} (registration/handle-place-selection params))
    (route/resources "/")
    (route/not-found "Not Found")))

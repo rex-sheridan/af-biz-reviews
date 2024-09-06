@@ -13,7 +13,9 @@
 
 (defonce server (atom nil))
 
-(defn start! [] (swap! server run))
+(defn start! [] 
+  (create-tables)
+  (swap! server run))
 
 (defn stop! [] (swap! server
                       (fn [a] (when-some [s a]

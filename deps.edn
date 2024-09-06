@@ -3,6 +3,8 @@
         ring/ring-core {:mvn/version "1.12.2"}
         ring/ring-jetty-adapter {:mvn/version "1.12.2"}
         ring/ring-defaults {:mvn/version "0.5.0"}
+        clj-http/clj-http {:mvn/version "3.13.0"}
+        cheshire/cheshire {:mvn/version "5.13.0"}
         compojure/compojure {:mvn/version "1.7.1"}
         selmer/selmer {:mvn/version "1.12.61"}
         org.xerial/sqlite-jdbc {:mvn/version "3.46.1.0"}

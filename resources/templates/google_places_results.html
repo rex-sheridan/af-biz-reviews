@@ -1,0 +1,27 @@
+<div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4">Google Places Search Results</h2>
+    {% if error %}
+      <p class="text-red-500">{{ error }}</p>
+    {% elif results|empty? %}
+      <p>No matches found on Google</p>
+    {% else %}
+      <p class="mb-4">Please select your business from the following matches:</p>
+      {% for place in results %}
+        <div class="border p-4 mb-4 rounded">
+          <h3 class="font-semibold">{{ place.displayName.text }}</h3>
+          <p>{{ place.formattedAddress }}</p>
+          <button hx-post="/select-place"
+                  hx-vals='{"company-id": "{{ company-id }}", "place-id": "{{ place.id }}"}'
+                  class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            This is my business
+          </button>
+        </div>
+      {% endfor %}
+      <button hx-post="/select-place"
+              hx-vals='{"company-id": "{{ company-id }}", "place-id": "none"}'
+              class="mt-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+        None of these are my business
+      </button>
+    {% endif %}
+  </div>
+  

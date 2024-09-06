@@ -1,8 +1,9 @@
 (ns tax-review-app.db
   (:require [next.jdbc :as jdbc]
             [honey.sql :as sql]
-            [honey.sql.helpers :refer [insert-into select from values]]
-            [clojure.java.io :as io]))
+            [honey.sql.helpers :refer [insert-into select from values where update set returning]]
+            [clojure.java.io :as io])
+  (:refer-clojure :exclude [update set]))
 
 
 (def db-file "database/reviews.db")
@@ -29,7 +30,9 @@
                          state TEXT,
                          zipcode TEXT,
                          country TEXT,
-                         phone TEXT)"])
+                         phone TEXT,
+                         Google_Place_ID TEXT,
+                         Google_Place_ID_Last_Updated TEXT)"])
     (jdbc/execute! ds ["CREATE TABLE IF NOT EXISTS reviews
                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
                          company_id INTEGER,
@@ -38,12 +41,25 @@
                          source TEXT,
                          FOREIGN KEY(company_id) REFERENCES companies(id))"])))
 
-(defn add-company! [company]
-  (let [ds (jdbc/get-datasource db-spec)]
-    (jdbc/execute! ds (-> (insert-into :companies)
-                          (values [company])
-                          sql/format))))
+(defn update-company-google-place-id! [company-id place-id]
+  (let [ds (jdbc/get-datasource db-spec)
+        formatted-sql (-> (update :companies)
+                          (set {:Google_Place_ID place-id
+                                :Google_Place_ID_Last_Updated (str (java.time.LocalDateTime/now))})
+                          (where [:= :id company-id])
+                          sql/format)]
+    (jdbc/execute! ds formatted-sql)))
 
+(defn add-company! [company]
+  (let [ds (jdbc/get-datasource db-spec)
+        formatted-sql (-> (insert-into :companies)
+                          (values [company])
+                          (returning :*)
+                          sql/format)
+        _ (println formatted-sql)
+        result (jdbc/execute-one! ds formatted-sql)
+        _ (println result)]
+    (result :companies/id)))
 (defn get-companies []
   (let [ds (jdbc/get-datasource db-spec)]
     (jdbc/execute! ds (-> (select :*)
